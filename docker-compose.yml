@@ -1,0 +1,39 @@
+version: '2'
+services:
+  master:
+    tty: true
+    build:
+      context: master
+    command: ["roscore"]
+
+  pub:
+    tty: true
+    build:
+      context: app
+    command: ["./run.sh", "basic_lecture", "basic_simple_talker"]
+    volumes:
+      - ./app:/app
+    depends_on:
+      - master
+    environment:
+      - ROS_MASTER_URI=http://master:11311
+
+  sub:
+    tty: true
+    build:
+      context: app
+    command: ["./run.sh", "basic_lecture", "basic_simple_listener"]
+    volumes:
+      - ./app:/app
+    depends_on:
+      - master
+    environment:
+      - ROS_MASTER_URI=http://master:11311
+
+  build:
+    tty: true
+    build:
+      context: app
+    command: ["catkin_make"]
+    volumes:
+      - ./app:/app
