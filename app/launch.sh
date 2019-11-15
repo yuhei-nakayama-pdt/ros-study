@@ -2,4 +2,4 @@ set -e
 
 source ./devel/setup.bash
 
-rosrun $1 $2
+roslaunch $1 $2

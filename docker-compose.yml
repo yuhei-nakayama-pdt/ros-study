@@ -6,23 +6,11 @@ services:
       context: master
     command: ["roscore"]
 
-  pub:
+  launch:
     tty: true
     build:
       context: app
-    command: ["./run.sh", "basic_lecture", "basic_simple_talker"]
-    volumes:
-      - ./app:/app
-    depends_on:
-      - master
-    environment:
-      - ROS_MASTER_URI=http://master:11311
-
-  sub:
-    tty: true
-    build:
-      context: app
-    command: ["./run.sh", "basic_lecture", "basic_simple_listener"]
+    command: ["./launch.sh", "basic_lecture", "pubsub.launch"]
     volumes:
       - ./app:/app
     depends_on:
