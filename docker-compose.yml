@@ -21,6 +21,21 @@ services:
       - DISPLAY=unix$DISPLAY
     ipc: host
 
+  turtlesim:
+    tty: true
+    build:
+      context: app
+    command: ["./run.sh", "turtlesim", "turtlesim_node"]
+    volumes:
+      - ./app:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    depends_on:
+      - master
+    environment:
+      - ROS_MASTER_URI=http://master:11311
+      - DISPLAY=unix$DISPLAY
+    ipc: host
+
   build:
     tty: true
     build:
