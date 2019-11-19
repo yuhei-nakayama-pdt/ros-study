@@ -15,3 +15,10 @@ docker-compose up build
 $ xhost +
 $ docker-compose up launch
 ```
+
+# Copy include to local (for intellisense)
+
+```sh
+$ docker cp $(docker-compose images | grep build | cut -d' ' -f1):/usr/include/ .
+$ docker cp $(docker-compose images | grep build | cut -d' ' -f1):/opt/ros/kinetic/include/ .
+```
